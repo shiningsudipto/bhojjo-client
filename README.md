@@ -11,3 +11,4 @@
 ### Essential Packages:
 
 - https://zenui.net
+- https://www.hyperui.dev
