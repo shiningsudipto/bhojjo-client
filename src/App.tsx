@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
+import NavMenu from "../src/components/shared/NavMenu.jsx";
 
 function App() {
   return (
     <main>
-      <p>Header</p>
-      <h1 className="text-2xl bg-green-500">Bhojjo</h1>
+      <NavMenu />
       <Outlet />
       <p>Footer</p>
     </main>
