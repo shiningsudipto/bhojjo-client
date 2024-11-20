@@ -22,3 +22,13 @@ body {
   color: white;
   background: var(--primary);
 }
+
+.banner {
+  background-image: linear-gradient(to right, white, rgba(0, 0, 0, 0) 90%),
+    url("bg-bhojjo.jpg");
+  background-size: cover;
+}
+
+.section-gap-x {
+  @apply px-[100px];
+}
