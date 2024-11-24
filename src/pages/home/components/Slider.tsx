@@ -24,7 +24,7 @@ const Slider = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 py-10">
+    <div className="grid grid-cols-2 gap-10 section-gap-y section-gap-x">
       {/* left side */}
       <div>
         <Swiper
