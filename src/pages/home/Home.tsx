@@ -1,4 +1,6 @@
 import { Button } from "@material-tailwind/react";
+import Slider from "./components/Slider";
+import Contact from "./components/Contact";
 
 const Home = () => {
   return (
@@ -16,6 +18,8 @@ const Home = () => {
           </Button>
         </div>
       </div>
+      <Slider />
+      <Contact />
     </div>
   );
 };
