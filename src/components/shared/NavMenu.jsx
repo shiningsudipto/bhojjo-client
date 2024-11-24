@@ -19,6 +19,8 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 
+import { HiOutlineShoppingCart } from "react-icons/hi";
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -138,9 +140,12 @@ const NavMenu = () => {
           <div className="hidden lg:block">
             <NavList />
           </div>
-          <div className="hidden gap-2 lg:flex">
+          <div className="hidden gap-2 lg:flex items-center">
             <Button variant="outlined" color="white" size="sm">
               Log In
+            </Button>
+            <Button className="text-white text-2xl bg-transparent shadow-none hover:shadow-none">
+              <HiOutlineShoppingCart />
             </Button>
           </div>
           <IconButton

@@ -30,7 +30,7 @@ function Icon({ id, open }) {
 const FAQ = () => {
   const [open, setOpen] = useState(0);
 
-  const handleOpen = (value) => setOpen(open === value ? 0 : value);
+  const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
   return (
     <section className="section-gap-x section-gap-y">

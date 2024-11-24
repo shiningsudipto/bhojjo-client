@@ -2,6 +2,7 @@ import { Button } from "@material-tailwind/react";
 import Slider from "./components/Slider";
 import Contact from "./components/Contact";
 import FAQ from "./components/FAQ";
+import CartDrawer from "../../components/shared/CartDrawer";
 
 const Home = () => {
   return (
@@ -22,6 +23,7 @@ const Home = () => {
       <Slider />
       <Contact />
       <FAQ />
+      <CartDrawer />
     </div>
   );
 };
