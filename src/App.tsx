@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
-import NavMenu from "../src/components/shared/NavMenu.jsx";
+import NavMenu from "./components/shared/NavMenu";
+import Footer from "./components/shared/Footer";
 
 function App() {
   return (
     <main>
       <NavMenu />
       <Outlet />
-      <p>Footer</p>
+      <Footer />
     </main>
   );
 }

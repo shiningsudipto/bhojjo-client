@@ -16,6 +16,10 @@ export default withMT({
           700: "#860000",
           800: "#730000",
         },
+        black: {
+          DEFAULT: "",
+          100: "#1F1F1F",
+        },
       },
       screens: {
         sm: "640px",
