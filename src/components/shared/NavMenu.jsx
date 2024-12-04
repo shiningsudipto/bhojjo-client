@@ -125,13 +125,38 @@ const NavMenu = () => {
           <img src="bhojjo.png" alt="" className="w-[120px]" />
         </div>
         <div className="">
-          <div className="inline-flex gap-2">
-            <div className="bg-primary rounded-full flex items-center">
-              <PhoneIcon className="size-7  text-white p-1 " strokeWidth={2} />
+          <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              <div className="lg:block hidden">
+                <Button
+                  variant="text"
+                  color="black"
+                  size="sm"
+                  className="text-sm capitalize"
+                >
+                  Home
+                </Button>
+                <Button
+                  variant="text"
+                  color="black"
+                  size="sm"
+                  className="text-sm capitalize"
+                >
+                  Shop
+                </Button>
+              </div>
+              <div className="inline-flex gap-2">
+                <div className="bg-primary rounded-full flex items-center">
+                  <PhoneIcon
+                    className="size-7  text-white p-1 "
+                    strokeWidth={2}
+                  />
+                </div>
+                <p className="mt-1">
+                  হটলাইন <span className="font-bold">01321215454</span>
+                </p>
+              </div>
             </div>
-            <p className="mt-1">
-              হটলাইন <span className="font-bold">01321215454</span>
-            </p>
           </div>
         </div>
       </div>
