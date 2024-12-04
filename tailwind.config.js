@@ -19,6 +19,12 @@ export default withMT({
         black: {
           DEFAULT: "",
           100: "#1F1F1F",
+          200: "#222222",
+        },
+        gray: {
+          DEFAULT: "",
+          100: "#F8F8F8",
+          200: "#5D5D5D",
         },
       },
       screens: {

@@ -3,6 +3,7 @@ import Slider from "./components/Slider";
 import Contact from "./components/Contact";
 import FAQ from "./components/FAQ";
 import CartDrawer from "../../components/shared/CartDrawer";
+import Delivery from "./components/Delivery";
 
 const Home = () => {
   return (
@@ -22,6 +23,7 @@ const Home = () => {
       </div>
       <Slider />
       <Contact />
+      <Delivery />
       <FAQ />
       <CartDrawer />
     </div>
