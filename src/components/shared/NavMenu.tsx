@@ -1,112 +1,90 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
-  Typography,
   Button,
   IconButton,
   List,
   ListItem,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Input,
 } from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-  PhoneIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import { HiOutlineShoppingCart } from "react-icons/hi";
+import { Link } from "react-router-dom";
+import { FaAngleDown } from "react-icons/fa6";
+import { TfiWorld } from "react-icons/tfi";
+import { IoSearchOutline } from "react-icons/io5";
 
-function NavListMenu() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-
-  return (
-    <React.Fragment>
-      <Menu
-        open={isMenuOpen}
-        handler={setIsMenuOpen}
-        placement="bottom"
-        allowHover={true}
-      >
-        <MenuHandler>
-          <Typography as="div" variant="small" className="font-medium">
-            <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-white"
-              selected={isMenuOpen || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              Blocks
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-            </ListItem>
-          </Typography>
-        </MenuHandler>
-        <MenuList className="hidden rounded-xl lg:block">
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </MenuList>
-      </Menu>
-      <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </Collapse>
-      </div>
-    </React.Fragment>
-  );
-}
+const categoryMenu = [
+  {
+    path: "/rice",
+    label: "Rice",
+  },
+  {
+    path: "/lentils",
+    label: "Lentils",
+  },
+];
 
 function NavList() {
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="white"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Pages</ListItem>
-      </Typography>
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="white"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Account
-        </ListItem>
-      </Typography>
-      <NavListMenu />
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="white"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Docs</ListItem>
-      </Typography>
+      {categoryMenu.map((item, index) => {
+        return (
+          <ListItem
+            key={index}
+            className="flex items-center justify-center px-0 pe-6 py-2 w-fit text-white text-base hover:bg-transparent"
+          >
+            <Link to={item.path}>{item.label}</Link>
+          </ListItem>
+        );
+      })}
     </List>
   );
 }
+
+const profileLinks = [
+  {
+    path: "/account",
+    label: "Account",
+  },
+  {
+    path: "/",
+    label: "Past Orders",
+  },
+  {
+    path: "/",
+    label: "Saved Collections",
+  },
+];
+
+const userPopoverMenu = (
+  <>
+    <Popover placement="bottom">
+      <PopoverHandler>
+        <Button className="bg-transparent shadow-none text-black-100 capitalize hover:shadow-none flex items-center gap-2 text-base font-medium px-0">
+          User Name <FaAngleDown />
+        </Button>
+      </PopoverHandler>
+      <PopoverContent className="flex flex-col p-0 rounded-none">
+        {profileLinks?.map((item, index) => {
+          return (
+            <Link
+              to={item.path}
+              key={index}
+              className="hover:bg-primary hover:text-white px-4 py-2 text-black-100"
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </PopoverContent>
+    </Popover>
+  </>
+);
 
 const NavMenu = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -120,58 +98,44 @@ const NavMenu = () => {
 
   return (
     <>
-      <div className="px-10 py-4 flex items-center justify-between">
+      <div className="section-gap-x py-2 flex items-center justify-between">
         <div>
           <img src="bhojjo.png" alt="" className="w-[120px]" />
         </div>
-        <div className="">
-          <div className="flex items-center">
-            <div className="flex items-center gap-2">
-              <div className="lg:block hidden">
-                <Button
-                  variant="text"
-                  color="black"
-                  size="sm"
-                  className="text-sm capitalize"
-                >
-                  Home
-                </Button>
-                <Button
-                  variant="text"
-                  color="black"
-                  size="sm"
-                  className="text-sm capitalize"
-                >
-                  Shop
-                </Button>
-              </div>
-              <div className="inline-flex gap-2">
-                <div className="bg-primary rounded-full flex items-center">
-                  <PhoneIcon
-                    className="size-7  text-white p-1 "
-                    strokeWidth={2}
-                  />
-                </div>
-                <p className="mt-1">
-                  হটলাইন <span className="font-bold">01321215454</span>
-                </p>
-              </div>
-            </div>
+        <div className="flex items-center gap-2">
+          <div className="lg:flex hidden flex-row items-center gap-x-5">
+            <button className="flex items-center gap-2">
+              <TfiWorld />
+              BN
+            </button>
+            {userPopoverMenu}
+            <Button
+              variant="outlined"
+              color="black"
+              size="sm"
+              className="text-base font-medium capitalize py-1 h-[40px]"
+            >
+              Log In
+            </Button>
           </div>
+          <div className="lg:hidden block">{userPopoverMenu}</div>
         </div>
       </div>
-      <Navbar className="mx-auto px-4 py-1 bg-primary text-white rounded-none">
+      <Navbar className="section-gap-x py-1 bg-primary text-white rounded-none">
         <div className="flex items-center justify-between text-white">
           <div className="hidden lg:block">
             <NavList />
           </div>
           <div className="hidden gap-2 lg:flex items-center">
-            <Button variant="outlined" color="white" size="sm">
-              Log In
-            </Button>
-            <Button className="text-white text-2xl bg-transparent shadow-none hover:shadow-none">
-              <HiOutlineShoppingCart />
-            </Button>
+            <div className="relative">
+              <IoSearchOutline className="absolute text-xl right-1 top-[10px]" />
+              <Input
+                color="white"
+                label="Search"
+                crossOrigin=""
+                className="pe-7 min-w-[350px]"
+              />
+            </div>
           </div>
           <IconButton
             variant="text"

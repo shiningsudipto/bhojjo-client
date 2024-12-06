@@ -30,7 +30,7 @@ body {
 }
 
 .section-gap-x {
-  @apply px-[100px];
+  @apply lg:px-[100px] md:px-[60px] px-4;
 }
 .section-gap-y {
   @apply py-10;
