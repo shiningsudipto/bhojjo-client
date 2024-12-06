@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  persistReducer,
   persistStore,
   FLUSH,
   REHYDRATE,
@@ -10,7 +9,6 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import storage from "redux-persist/lib/storage";
 import baseApi from "./api/baseApi";
 
 // const persistConfig = {

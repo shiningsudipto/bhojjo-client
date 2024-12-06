@@ -1,9 +1,8 @@
 import { Button } from "@material-tailwind/react";
-import Slider from "./components/Slider";
-import Contact from "./components/Contact";
-import FAQ from "./components/FAQ";
 import CartDrawer from "../../components/shared/CartDrawer";
 import Delivery from "./components/Delivery";
+import TopProducts from "./components/TopProducts";
+import "./style.css";
 
 const Home = () => {
   return (
@@ -21,10 +20,8 @@ const Home = () => {
           </Button>
         </div>
       </div>
-      <Slider />
-      <Contact />
+      <TopProducts />
       <Delivery />
-      <FAQ />
       <CartDrawer />
     </div>
   );

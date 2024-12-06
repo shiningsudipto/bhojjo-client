@@ -39,3 +39,7 @@ body {
 .activeStep {
   @apply outline-2 outline outline-offset-[3px] outline-primary;
 }
+
+.section-heading {
+  @apply text-black-100 font-bold text-4xl mb-3;
+}

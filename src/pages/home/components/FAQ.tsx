@@ -6,7 +6,7 @@ import {
 import { faqs } from "../helper";
 import { useState } from "react";
 
-function Icon({ id, open }) {
+function Icon({ id, open }: { id: number; open: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,0 +1,23 @@
+.topProducts {
+  height: 510px;
+}
+.topProducts .swiper-button-prev,
+.topProducts .swiper-button-next {
+  bottom: 0 !important;
+  top: auto;
+  border: 1px solid rgb(138, 138, 138);
+  padding: 5px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.topProducts .swiper-button-next {
+  left: 80px;
+  right: auto;
+}
+.topProducts .swiper-button-prev:after,
+.topProducts .swiper-button-next:after {
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+}
