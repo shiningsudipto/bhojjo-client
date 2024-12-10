@@ -36,6 +36,10 @@ body {
   @apply py-10;
 }
 
+.section-gap-xy {
+  @apply py-10 px-[100px];
+}
+
 .activeStep {
   @apply outline-2 outline outline-offset-[3px] outline-primary;
 }
