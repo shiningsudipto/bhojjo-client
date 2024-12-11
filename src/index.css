@@ -47,3 +47,7 @@ body {
 .section-heading {
   @apply text-black-100 font-bold text-4xl mb-3;
 }
+
+.text-\[11px\] {
+  font-size: 14px;
+}

@@ -48,7 +48,7 @@ function NavList() {
 
 const profileLinks = [
   {
-    path: "/account",
+    path: "/account/details",
     label: "Account",
   },
   {

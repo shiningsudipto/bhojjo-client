@@ -21,7 +21,7 @@ const AccountLayout = () => {
   return (
     <main>
       <NavMenu />
-      <div className="section-gap-xy grid grid-cols-4">
+      <div className="section-gap-xy grid grid-cols-4 bg-gray-50">
         <div className="">
           {/* <img
             src="https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png"
