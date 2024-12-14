@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGetAllCategoryQuery } from "../../../redux/features/category";
-import { Radio } from "@material-tailwind/react";
+import { Button, Radio } from "@material-tailwind/react";
 import { TCategory } from "../../../types";
 import { Range } from "react-range";
 import { useState } from "react";
@@ -28,6 +28,9 @@ const Sidebar = () => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set(key, value);
     navigate(`?${searchParams.toString()}`);
+  };
+  const handleClearAll = () => {
+    navigate(location.pathname);
   };
   return (
     <div>
@@ -105,6 +108,13 @@ const Sidebar = () => {
           />
         ))}
       </div>
+      <Button
+        className="bg-primary capitalize mt-5 hover:shadow-none"
+        fullWidth
+        onClick={handleClearAll}
+      >
+        Clear all
+      </Button>
     </div>
   );
 };
