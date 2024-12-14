@@ -15,6 +15,10 @@ export const pageRoutes = [
         path: "account",
         element: <Account />,
       },
+      {
+        path: "shop",
+        element: <Products />,
+      },
     ],
   },
 ];

@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa6";
 import { TfiWorld } from "react-icons/tfi";
 import { IoSearchOutline } from "react-icons/io5";
+import Search from "./Search";
 
 const categoryMenu = [
   {
@@ -104,6 +105,7 @@ const NavMenu = () => {
         </div>
         <div className="flex items-center gap-2">
           <div className="lg:flex hidden flex-row items-center gap-x-5">
+            <Link to="/shop">Shop</Link>
             <button className="flex items-center gap-2">
               <TfiWorld />
               BN
@@ -128,13 +130,7 @@ const NavMenu = () => {
           </div>
           <div className="hidden gap-2 lg:flex items-center">
             <div className="relative">
-              <IoSearchOutline className="absolute text-xl right-1 top-[10px]" />
-              <Input
-                color="white"
-                label="Search"
-                crossOrigin=""
-                className="pe-7 min-w-[350px]"
-              />
+              <Search />
             </div>
           </div>
           <IconButton
