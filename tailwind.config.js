@@ -20,6 +20,7 @@ export default withMT({
           DEFAULT: "",
           100: "#1F1F1F",
           200: "#222222",
+          300: "#323233",
         },
         gray: {
           DEFAULT: "",

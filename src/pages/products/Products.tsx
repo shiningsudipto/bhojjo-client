@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import { useGetAllProductQuery } from "../../redux/features/product";
+import ProductCard from "../../components/ui/ProductCard";
 
 const Products = () => {
   const location = useLocation();
@@ -26,16 +27,12 @@ const Products = () => {
   console.log(productData);
 
   return (
-    <div className="section-gap-xy flex gap-10">
-      <div className="bg-gray-50 w-[25%] p-5 rounded-md">
+    <div className="section-gap-xy flex gap-5">
+      <div className="bg-gray-50 w-[23%] h-fit p-5 rounded-md">
         <Sidebar />
       </div>
-      <div className="bg-gray-50 w-[75%] p-5 rounded-md">
-        {productData?.map((item) => (
-          <div key={item?._id}>
-            <h2>{item?.title}</h2>
-          </div>
-        ))}
+      <div className="bg-gray-50 w-[77%] p-5 rounded-md">
+        <ProductCard products={productData} />
       </div>
     </div>
   );
