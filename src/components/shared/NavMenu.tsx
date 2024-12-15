@@ -18,6 +18,7 @@ import { FaAngleDown } from "react-icons/fa6";
 import { TfiWorld } from "react-icons/tfi";
 import { IoSearchOutline } from "react-icons/io5";
 import Search from "./Search";
+import Login from "../../pages/login/Login";
 
 const categoryMenu = [
   {
@@ -111,14 +112,7 @@ const NavMenu = () => {
               BN
             </button>
             {userPopoverMenu}
-            <Button
-              variant="outlined"
-              color="black"
-              size="sm"
-              className="text-base font-medium capitalize py-1 h-[40px]"
-            >
-              Log In
-            </Button>
+            <Login />
           </div>
           <div className="lg:hidden block">{userPopoverMenu}</div>
         </div>
@@ -148,9 +142,7 @@ const NavMenu = () => {
         <Collapse open={openNav}>
           <NavList />
           <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-            <Button variant="outlined" size="sm" fullWidth>
-              Log In
-            </Button>
+            <Login />
           </div>
         </Collapse>
       </Navbar>

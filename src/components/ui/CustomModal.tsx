@@ -6,6 +6,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { ReactNode, FC } from "react";
+import { SiX } from "react-icons/si";
 
 interface CustomModalProps {
   title?: string;
@@ -14,6 +15,7 @@ interface CustomModalProps {
   open: boolean;
   footer?: boolean;
   scroll?: boolean;
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
   children: ReactNode;
 }
 
@@ -23,6 +25,7 @@ const CustomModal: FC<CustomModalProps> = ({
   setOpen,
   footer = false,
   scroll = false,
+  size,
   onClick,
   children,
 }) => {
@@ -30,7 +33,12 @@ const CustomModal: FC<CustomModalProps> = ({
 
   return (
     <div>
-      <Dialog open={open} handler={handleOpen}>
+      <Dialog
+        open={open}
+        handler={handleOpen}
+        size={size ? size : "md"}
+        className=""
+      >
         {title && (
           <DialogHeader className="px-5 text-xl pb-0">{title}</DialogHeader>
         )}
