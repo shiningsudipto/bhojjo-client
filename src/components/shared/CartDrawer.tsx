@@ -43,60 +43,73 @@ const CartDrawer = () => {
         onClose={closeDrawerRight}
         className="p-4"
       >
-        <div className="mb-6 flex items-center justify-between">
-          <Typography variant="h5" color="blue-gray">
-            My cart
-          </Typography>
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            onClick={closeDrawerRight}
-          >
-            <IoClose className="text-xl" />
-          </IconButton>
-        </div>
-        <div>
-          <div className="space-y-4">
-            {items?.map((item) => {
-              return (
-                <div key={item?.id} className="grid grid-cols-4 gap-3">
-                  <img
-                    src={`http://localhost:5000${item.image}`}
-                    alt=""
-                    className="h-full object-cover col-span-1 rounded-md"
-                  />
-                  <div className="flex flex-col col-span-2 justify-between">
-                    <p>{item.title}</p>
-                    <div className="flex items-center gap-3">
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <div className="mb-6 flex items-center justify-between">
+              <Typography variant="h5" color="blue-gray">
+                My cart
+              </Typography>
+              <IconButton
+                variant="text"
+                color="blue-gray"
+                onClick={closeDrawerRight}
+              >
+                <IoClose className="text-xl" />
+              </IconButton>
+            </div>
+            <div className="space-y-4">
+              {items?.map((item) => {
+                return (
+                  <div key={item?.id} className="grid grid-cols-4 gap-3">
+                    <img
+                      src={`http://localhost:5000${item.image}`}
+                      alt=""
+                      className="h-full object-cover col-span-1 rounded-md"
+                    />
+                    <div className="flex flex-col col-span-2 justify-between">
+                      <p>{item.title}</p>
+                      <div className="flex items-center gap-3">
+                        <p>Quantity:</p>
+                        <button
+                          onClick={() => dispatch(increaseQuantity(item.id))}
+                        >
+                          <FiPlusCircle className="text-xl" />
+                        </button>
+                        <p>{item.quantity}</p>
+                        <button
+                          onClick={() => dispatch(decreaseQuantity(item.id))}
+                        >
+                          <FiMinusCircle className="text-xl" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="col-span-1 flex flex-col items-end justify-between">
+                      {(item.quantity * item.price).toFixed(2)} TK
                       <button
-                        onClick={() => dispatch(increaseQuantity(item.id))}
+                        onClick={() => dispatch(removeProduct(item.id))}
+                        title="remove product"
+                        className="bg-blue-gray-50 p-1 rounded-md hover:bg-primary hover:text-white "
                       >
-                        <FiPlusCircle className="text-xl" />
-                      </button>
-                      <p>{item.quantity}</p>
-                      <button
-                        onClick={() => dispatch(decreaseQuantity(item.id))}
-                      >
-                        <FiMinusCircle className="text-xl" />
+                        <RxCrossCircled className="text-xl" />
                       </button>
                     </div>
                   </div>
-                  <div className="col-span-1 flex flex-col items-end justify-between">
-                    {(item.quantity * item.price).toFixed(2)} TK
-                    <button
-                      onClick={() => dispatch(removeProduct(item.id))}
-                      title="remove product"
-                      className="bg-blue-gray-50 p-1 rounded-md"
-                    >
-                      <RxCrossCircled className="text-xl" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-          <div>
-            <p>{totalPrice}</p>
+          <div className="border-t pt-3">
+            <div className="flex justify-between items-center text-lg font-bold">
+              <p>Total price:</p>
+              <p>{totalPrice.toFixed(2)} TK</p>
+            </div>
+            <Button
+              className="capitalize text-[16px] font-medium bg-primary hover:shadow-none mt-5"
+              size="sm"
+              fullWidth
+            >
+              Checkout
+            </Button>
           </div>
         </div>
       </Drawer>
