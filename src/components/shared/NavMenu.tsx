@@ -16,9 +16,10 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa6";
 import { TfiWorld } from "react-icons/tfi";
-import { IoSearchOutline } from "react-icons/io5";
 import Search from "./Search";
 import Login from "../../pages/login/Login";
+import { useAppSelector } from "../../redux/hooks";
+import { TUser, useCurrentUser } from "../../redux/slices/auth";
 
 const categoryMenu = [
   {
@@ -63,33 +64,36 @@ const profileLinks = [
   },
 ];
 
-const userPopoverMenu = (
-  <>
-    <Popover placement="bottom">
-      <PopoverHandler>
-        <Button className="bg-transparent shadow-none text-black-100 capitalize hover:shadow-none flex items-center gap-2 text-base font-medium px-0">
-          User Name <FaAngleDown />
-        </Button>
-      </PopoverHandler>
-      <PopoverContent className="flex flex-col p-0 rounded-none">
-        {profileLinks?.map((item, index) => {
-          return (
-            <Link
-              to={item.path}
-              key={index}
-              className="hover:bg-primary hover:text-white px-4 py-2 text-black-100"
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-      </PopoverContent>
-    </Popover>
-  </>
-);
-
 const NavMenu = () => {
   const [openNav, setOpenNav] = useState(false);
+  const user = useAppSelector(useCurrentUser) as TUser;
+
+  const userPopoverMenu = (
+    <>
+      <Popover placement="bottom">
+        <PopoverHandler>
+          <Button className="bg-transparent shadow-none text-black-100 capitalize hover:shadow-none flex items-center gap-2 text-base font-medium px-0">
+            {/* {user?.name ? user?.name : "Account"}  */}
+            {user?.phone}
+            <FaAngleDown />
+          </Button>
+        </PopoverHandler>
+        <PopoverContent className="flex flex-col p-0 rounded-none">
+          {profileLinks?.map((item, index) => {
+            return (
+              <Link
+                to={item.path}
+                key={index}
+                className="hover:bg-primary hover:text-white px-4 py-2 text-black-100"
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </PopoverContent>
+      </Popover>
+    </>
+  );
 
   useEffect(() => {
     window.addEventListener(

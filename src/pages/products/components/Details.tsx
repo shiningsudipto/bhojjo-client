@@ -17,7 +17,8 @@ const Details = ({ details }: { details?: TProduct }) => {
             return (
               <div key={index} className="w-full z-0">
                 <img
-                  src={`http://localhost:5000${item}`}
+                  // src={`http://localhost:5000${item}`}
+                  src={`https://pqina.nl/pintura/static/assets/picture.svg`}
                   alt="image 1"
                   className="h-[300px] w-full object-cover rounded-md"
                 />

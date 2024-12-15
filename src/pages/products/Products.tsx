@@ -24,8 +24,6 @@ const Products = () => {
   const { data, isLoading, error } = useGetAllProductQuery(query);
   const productData = data?.data;
 
-  console.log(productData);
-
   return (
     <div className="section-gap-xy flex gap-5">
       <div className="bg-gray-50 w-[23%] h-fit p-5 rounded-md">

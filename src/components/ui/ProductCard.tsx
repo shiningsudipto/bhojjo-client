@@ -13,7 +13,6 @@ const ProductCard = ({ products }: { products: TProduct[] }) => {
 
   const dispatch = useAppDispatch();
   const { items } = useAppSelector(useCartOptions);
-  console.log(items);
 
   return (
     <>
@@ -22,7 +21,8 @@ const ProductCard = ({ products }: { products: TProduct[] }) => {
           return (
             <div key={item?._id} className="space-y-2">
               <img
-                src={`http://localhost:5000${item.images[0]}`}
+                // src={`http://localhost:5000${item.images[0]}`}
+                src={`https://pqina.nl/pintura/static/assets/picture.svg`}
                 alt=""
                 className="h-[250px] w-full object-cover rounded-md"
               />
