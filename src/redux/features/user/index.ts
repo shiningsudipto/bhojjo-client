@@ -2,9 +2,9 @@ import baseApi from "../../api/baseApi";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllCategory: builder.query({
-      query: () => `/category`,
-      providesTags: ["Category"],
+    getUserById: builder.query({
+      query: (id) => `/user-by-id/${id}`,
+      providesTags: ["User"],
     }),
     sendOTP: builder.mutation({
       query: (userData) => ({
@@ -20,7 +20,20 @@ const userApi = baseApi.injectEndpoints({
         body: userData,
       }),
     }),
+    updateUser: builder.mutation({
+      query: ({ id, userData }) => ({
+        url: `/update-user/${id}`,
+        method: "PUT",
+        body: userData,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const { useSendOTPMutation, useLoginMutation } = userApi;
+export const {
+  useGetUserByIdQuery,
+  useSendOTPMutation,
+  useLoginMutation,
+  useUpdateUserMutation,
+} = userApi;

@@ -1,16 +1,44 @@
 import { Form, Formik, FormikValues } from "formik";
 import FormikInput from "../../components/Formik/FormikInput";
 import { Button } from "@material-tailwind/react";
+import { setUser, TUser, useCurrentUser } from "../../redux/slices/auth";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  useGetUserByIdQuery,
+  useUpdateUserMutation,
+} from "../../redux/features/user";
+import { TErrorResponse, TUserDB } from "../../types";
+import { toast } from "sonner";
 
 const Account = () => {
+  const user = useAppSelector(useCurrentUser) as TUser;
+  const { data } = useGetUserByIdQuery(user?.id);
+  const [updateUserFunc] = useUpdateUserMutation();
+  const userData = data?.data as TUserDB;
+  const dispatch = useAppDispatch();
   const initialValues = {
-    name: "User Name",
-    email: "user@gmail.com",
-    district: "Dhaka",
-    address: "Mirpur 2/3, Chowdhury villa, Dhaka",
+    name: userData?.name,
+    email: userData?.email,
+    district: userData?.district,
+    address: userData?.address,
   };
   const handleSubmit = async (values: FormikValues) => {
-    console.log(values);
+    const toastId = toast.loading("Login processing!");
+    try {
+      const res = await updateUserFunc({
+        id: user?.id,
+        userData: values,
+      }).unwrap();
+      console.log(res);
+      if (res.success) {
+        toast.success(res.message, { id: toastId, duration: 2000 });
+        dispatch(setUser({ user: { ...user, name: res?.data?.name } }));
+      }
+    } catch (error) {
+      console.log("error:", error);
+      const err = error as TErrorResponse;
+      toast.error(err?.data?.message, { id: toastId, duration: 2000 });
+    }
   };
   return (
     <div className="bg-white p-10">
@@ -20,7 +48,11 @@ const Account = () => {
           Tell us about yourself to help us make it easy for you to shop with us
         </p>
       </div>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        enableReinitialize
+      >
         {({ dirty }) => {
           return (
             <Form className="mt-10 space-y-10">

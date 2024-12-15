@@ -73,8 +73,7 @@ const NavMenu = () => {
       <Popover placement="bottom">
         <PopoverHandler>
           <Button className="bg-transparent shadow-none text-black-100 capitalize hover:shadow-none flex items-center gap-2 text-base font-medium px-0">
-            {/* {user?.name ? user?.name : "Account"}  */}
-            {user?.phone}
+            {user?.name ? user?.name : "Account"}
             <FaAngleDown />
           </Button>
         </PopoverHandler>

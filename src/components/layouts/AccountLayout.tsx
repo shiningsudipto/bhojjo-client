@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../shared/Footer";
 import NavMenu from "../shared/NavMenu";
+import { useAppSelector } from "../../redux/hooks";
+import { TUser, useCurrentUser } from "../../redux/slices/auth";
 
 const userNavLinks = [
   {
@@ -18,6 +20,7 @@ const userNavLinks = [
 ];
 
 const AccountLayout = () => {
+  const user = useAppSelector(useCurrentUser) as TUser;
   return (
     <main>
       <NavMenu />
@@ -29,8 +32,10 @@ const AccountLayout = () => {
             className="size-[175px] object-cover"
           /> */}
           <div className="space-y-2">
-            <p className="text-xl font-bold">User Name</p>
-            <p className="font-semibold">01711111111</p>
+            <p className="text-xl font-bold">
+              {user?.name ? user?.name : "Your name!"}
+            </p>
+            <p className="font-semibold">{user?.phone}</p>
           </div>
           <div className="mt-10 flex flex-col gap-y-2">
             {userNavLinks.map((item, index) => {
