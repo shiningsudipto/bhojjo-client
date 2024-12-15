@@ -6,8 +6,20 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeProduct,
+  useCartOptions,
+} from "../../redux/slices/cartSlice";
+import { IoClose } from "react-icons/io5";
+import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
+import { RxCrossCircled } from "react-icons/rx";
 const CartDrawer = () => {
   const [openRight, setOpenRight] = useState(false);
+  const { items, totalPrice } = useAppSelector(useCartOptions);
+  const dispatch = useAppDispatch();
   const openDrawerRight = () => setOpenRight(true);
   const closeDrawerRight = () => setOpenRight(false);
   return (
@@ -18,10 +30,14 @@ const CartDrawer = () => {
           className="bg-primary text-2xl p-2 flex flex-col items-center gap-2"
         >
           <HiOutlineShoppingCart />
-          <p className="text-base capitalize">5 Items</p>
+          <p className="text-base capitalize">
+            {" "}
+            {items.length} {items.length < 2 ? "Item" : "Items"}{" "}
+          </p>
         </Button>
       </div>
       <Drawer
+        size={400}
         placement="right"
         open={openRight}
         onClose={closeDrawerRight}
@@ -29,38 +45,59 @@ const CartDrawer = () => {
       >
         <div className="mb-6 flex items-center justify-between">
           <Typography variant="h5" color="blue-gray">
-            Material Tailwind
+            My cart
           </Typography>
           <IconButton
             variant="text"
             color="blue-gray"
             onClick={closeDrawerRight}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <IoClose className="text-xl" />
           </IconButton>
         </div>
-        <Typography color="gray" className="mb-8 pr-4 font-normal">
-          Material Tailwind features multiple React and HTML components, all
-          written with Tailwind CSS classes and Material Design guidelines.
-        </Typography>
-        <div className="flex gap-2">
-          <Button size="sm" variant="outlined">
-            Documentation
-          </Button>
-          <Button size="sm">Get Started</Button>
+        <div>
+          <div className="space-y-4">
+            {items?.map((item) => {
+              return (
+                <div key={item?.id} className="grid grid-cols-4 gap-3">
+                  <img
+                    src={`http://localhost:5000${item.image}`}
+                    alt=""
+                    className="h-full object-cover col-span-1 rounded-md"
+                  />
+                  <div className="flex flex-col col-span-2 justify-between">
+                    <p>{item.title}</p>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => dispatch(increaseQuantity(item.id))}
+                      >
+                        <FiPlusCircle className="text-xl" />
+                      </button>
+                      <p>{item.quantity}</p>
+                      <button
+                        onClick={() => dispatch(decreaseQuantity(item.id))}
+                      >
+                        <FiMinusCircle className="text-xl" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="col-span-1 flex flex-col items-end justify-between">
+                    {(item.quantity * item.price).toFixed(2)} TK
+                    <button
+                      onClick={() => dispatch(removeProduct(item.id))}
+                      title="remove product"
+                      className="bg-blue-gray-50 p-1 rounded-md"
+                    >
+                      <RxCrossCircled className="text-xl" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <p>{totalPrice}</p>
+          </div>
         </div>
       </Drawer>
     </div>

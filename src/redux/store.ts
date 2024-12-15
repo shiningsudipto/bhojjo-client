@@ -7,19 +7,24 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  persistReducer,
 } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import baseApi from "./api/baseApi";
 
-// const persistConfig = {
-//   key: "auth",
-//   storage,
-// };
+import cartReducer from "./slices/cartSlice";
 
-// const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistConfig = {
+  key: "cart",
+  storage,
+};
+
+const persistedCartReducer = persistReducer(persistConfig, cartReducer);
 
 export const store = configureStore({
   reducer: {
+    cart: persistedCartReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

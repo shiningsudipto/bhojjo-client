@@ -1,5 +1,4 @@
 import { Button } from "@material-tailwind/react";
-import CartDrawer from "../../components/shared/CartDrawer";
 import Delivery from "./components/Delivery";
 import TopProducts from "./components/TopProducts";
 import "./style.css";
@@ -22,7 +21,6 @@ const Home = () => {
       </div>
       <TopProducts />
       <Delivery />
-      <CartDrawer />
     </div>
   );
 };
