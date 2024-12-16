@@ -48,7 +48,7 @@ export type TUserDB = {
   password: string;
   phone: string;
   role: "admin" | "user";
-  district: string;
+  city: string;
   address?: string;
   __v: number;
 };

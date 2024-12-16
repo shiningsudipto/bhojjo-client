@@ -19,7 +19,7 @@ const FormikForm = <T extends object>({
     <div className={className}>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {() => {
-          return <Form className="space-y-4">{children}</Form>;
+          return <Form className="space-y-5">{children}</Form>;
         }}
       </Formik>
     </div>

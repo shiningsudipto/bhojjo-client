@@ -19,7 +19,7 @@ const Account = () => {
   const initialValues = {
     name: userData?.name,
     email: userData?.email,
-    district: userData?.district,
+    city: userData?.city,
     address: userData?.address,
   };
   const handleSubmit = async (values: FormikValues) => {
@@ -59,7 +59,7 @@ const Account = () => {
               <div className="grid grid-cols-2 gap-10">
                 <FormikInput name="name" label="Name" />
                 <FormikInput name="email" label="Email" />
-                <FormikInput name="district" label="District" />
+                <FormikInput name="city" label="City" />
               </div>
               <FormikInput name="address" label="Full Address" />
               {dirty && (

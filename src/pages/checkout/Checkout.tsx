@@ -17,7 +17,7 @@ const Checkout = () => {
   const userData = data?.data as TUserDB;
 
   const initialValues = {
-    district: userData?.district,
+    district: userData?.city,
     address: userData?.address,
   };
   const handlePayment = async (values: FormikValues) => {
@@ -30,8 +30,8 @@ const Checkout = () => {
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 mt-10">
         <div>
           <FormikForm initialValues={initialValues} onSubmit={handlePayment}>
-            <FormikInput name="district" label="City" readOnly />
-            <FormikInput name="address" label="Full address" />
+            <FormikInput name="district" label="City" required />
+            <FormikInput name="address" label="Full address" required />
           </FormikForm>
         </div>
         <div className="bg-gray-50 p-5 rounded-md">
