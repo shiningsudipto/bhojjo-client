@@ -104,7 +104,9 @@ const NavMenu = () => {
     <>
       <div className="section-gap-x py-2 flex items-center justify-between">
         <div>
-          <img src="bhojjo.png" alt="" className="w-[120px]" />
+          <Link to={"/"}>
+            <img src="bhojjo.png" alt="" className="w-[120px]" />
+          </Link>
         </div>
         <div className="flex items-center gap-2">
           <div className="lg:flex hidden flex-row items-center gap-x-5">

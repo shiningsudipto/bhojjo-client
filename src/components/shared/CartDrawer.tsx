@@ -62,7 +62,7 @@ const CartDrawer = () => {
                 return (
                   <div key={item?.id} className="grid grid-cols-4 gap-3">
                     <img
-                      src={`http://localhost:5000${item.image}`}
+                      src={`https://pqina.nl/pintura/static/assets/picture.svg`}
                       alt=""
                       className="h-full object-cover col-span-1 rounded-md"
                     />

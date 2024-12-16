@@ -10,6 +10,7 @@ import { Form, Formik, FormikValues } from "formik";
 import { Radio } from "@material-tailwind/react";
 import { toast } from "sonner";
 import { FaRegHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MyPackages = ({ id, productId }: { id: String; productId: String }) => {
   const { data } = useGetAllPackageByUserQuery(id);
@@ -45,39 +46,45 @@ const MyPackages = ({ id, productId }: { id: String; productId: String }) => {
       </button>
       <CustomModal
         size="xs"
-        title="My Packages"
+        title="My Collections"
         open={isPackagesModalOpen}
         setOpen={setPackagesModalOpen}
       >
-        <h3 className="text-lg font-bold">
-          {data?.data?.length === 0 && "Package not available"}
-        </h3>
-        <Formik initialValues={{}} onSubmit={handleSubmit} enableReinitialize>
-          {({ setFieldValue }) => {
-            return (
-              <Form className="space-y-3 flex flex-col">
-                {data?.data?.map((item: TPackage) => {
-                  return (
-                    <Radio
-                      value={item?._id}
-                      onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                        setFieldValue(
-                          "packageId",
-                          (e.target as HTMLInputElement).value
-                        )
-                      }
-                      crossOrigin={""}
-                      key={item?._id}
-                      name="packageId"
-                      label={item?.name}
-                    />
-                  );
-                })}
-                <CustomButton type="submit" label="Add to collection" />
-              </Form>
-            );
-          }}
-        </Formik>
+        {data?.data?.length === 0 ? (
+          <div>
+            <h3 className="text-lg font-bold">Collection not available</h3>
+            <Link to={"/account/my-collections"} className=" text-primary">
+              Create Collection
+            </Link>
+          </div>
+        ) : (
+          <Formik initialValues={{}} onSubmit={handleSubmit} enableReinitialize>
+            {({ setFieldValue }) => {
+              return (
+                <Form className="space-y-3 flex flex-col">
+                  {data?.data?.map((item: TPackage) => {
+                    return (
+                      <Radio
+                        value={item?._id}
+                        onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+                          setFieldValue(
+                            "packageId",
+                            (e.target as HTMLInputElement).value
+                          )
+                        }
+                        crossOrigin={""}
+                        key={item?._id}
+                        name="packageId"
+                        label={item?.name}
+                      />
+                    );
+                  })}
+                  <CustomButton type="submit" label="Add to collection" />
+                </Form>
+              );
+            }}
+          </Formik>
+        )}
       </CustomModal>
     </div>
   );
