@@ -39,7 +39,12 @@ const Sidebar = () => {
         {categoryData?.map((item) => (
           <Radio
             value={item?.category}
-            onClick={(e) => handleFilterChange("category", e.target.value)}
+            onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+              handleFilterChange(
+                "category",
+                (e.target as HTMLInputElement).value
+              )
+            }
             crossOrigin={""}
             key={item?._id}
             name="type"
@@ -100,7 +105,12 @@ const Sidebar = () => {
           <Radio
             defaultChecked={item?.value === "asc"}
             value={item?.value}
-            onClick={(e) => handleFilterChange("sortOrder", e.target.value)}
+            onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+              handleFilterChange(
+                "sortOrder",
+                (e.target as HTMLInputElement).value
+              )
+            }
             crossOrigin={""}
             key={item?.value}
             name="type"

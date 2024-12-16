@@ -9,7 +9,6 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
-  Input,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -23,11 +22,11 @@ import { TUser, useCurrentUser } from "../../redux/slices/auth";
 
 const categoryMenu = [
   {
-    path: "/rice",
+    path: "/shop",
     label: "Rice",
   },
   {
-    path: "/lentils",
+    path: "/shop",
     label: "Lentils",
   },
 ];
@@ -55,11 +54,11 @@ const profileLinks = [
     label: "Account",
   },
   {
-    path: "/",
+    path: "/account/order-history",
     label: "Past Orders",
   },
   {
-    path: "/",
+    path: "/account/my-collections",
     label: "Saved Collections",
   },
 ];
@@ -114,7 +113,7 @@ const NavMenu = () => {
               <TfiWorld />
               BN
             </button>
-            {userPopoverMenu}
+            {user && userPopoverMenu}
             <Login />
           </div>
           <div className="lg:hidden block">{userPopoverMenu}</div>

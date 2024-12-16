@@ -5,21 +5,23 @@ import { useState } from "react";
 import CustomModal from "./CustomModal";
 import Details from "../../pages/products/components/Details";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { addToCart, useCartOptions } from "../../redux/slices/cartSlice";
+import { addToCart } from "../../redux/slices/cartSlice";
+import { TUser, useCurrentUser } from "../../redux/slices/auth";
+import MyPackages from "../../pages/collections/components/MyPackages";
 
 const ProductCard = ({ products }: { products: TProduct[] }) => {
   const [isDetailsModalOpen, setDetailsModalOpen] = useState(false);
   const [productDetails, setProductDetails] = useState<TProduct>();
+  const user = useAppSelector(useCurrentUser) as TUser;
 
   const dispatch = useAppDispatch();
-  const { items } = useAppSelector(useCartOptions);
 
   return (
     <>
       <div className="grid grid-cols-3 gap-x-5 gap-y-10">
         {products?.map((item) => {
           return (
-            <div key={item?._id} className="space-y-2">
+            <div key={item?._id} className="space-y-2 relative">
               <img
                 // src={`http://localhost:5000${item.images[0]}`}
                 src={`https://pqina.nl/pintura/static/assets/picture.svg`}
@@ -51,6 +53,11 @@ const ProductCard = ({ products }: { products: TProduct[] }) => {
               >
                 More details
               </Button>
+              {user && (
+                <div className="absolute top-0 right-2">
+                  <MyPackages id={user?.id} productId={item?._id} />
+                </div>
+              )}
             </div>
           );
         })}

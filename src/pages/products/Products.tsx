@@ -21,8 +21,12 @@ const Products = () => {
     maxPrice,
   };
 
-  const { data, isLoading, error } = useGetAllProductQuery(query);
+  const { data, isLoading } = useGetAllProductQuery(query);
   const productData = data?.data;
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="section-gap-xy flex gap-5">

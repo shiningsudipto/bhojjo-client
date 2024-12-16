@@ -17,6 +17,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 }) => {
   return (
     <Button
+      size="sm"
       disabled={disabled}
       onClick={onclick}
       type={type}
@@ -25,7 +26,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       className={` font-medium ${
         variant === "filled"
           ? "bg-primary hover:bg-primary-500"
-          : "text-secondary border-secondary font-semibold"
+          : "text-primary border-primary font-semibold"
       } hover:shadow-none text-base capitalize`}
     >
       {label}

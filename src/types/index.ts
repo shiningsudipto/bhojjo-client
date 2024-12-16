@@ -52,3 +52,29 @@ export type TUserDB = {
   address?: string;
   __v: number;
 };
+export interface TPackage {
+  _id: string;
+  buyer: string;
+  name: string;
+  totalItems: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  totalPrice: number;
+}
+
+export interface TPackageItem {
+  _id: string;
+  product: TPackageItemProduct;
+  package: string;
+  quantity: number;
+  __v: number;
+}
+
+export interface TPackageItemProduct {
+  _id: string;
+  title: string;
+  images: string[];
+  quantity: number;
+  price: number;
+}

@@ -6,7 +6,6 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { ReactNode, FC } from "react";
-import { SiX } from "react-icons/si";
 
 interface CustomModalProps {
   title?: string;
