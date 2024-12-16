@@ -6,8 +6,10 @@ import { RootState } from "../store";
 interface CartItem {
   id: string;
   title: string;
-  price: number; // Price after applying discount
+  discountedPrice: number;
+  price: number;
   quantity: number;
+  discount: number;
   image: string;
 }
 
@@ -15,11 +17,13 @@ interface CartItem {
 interface CartState {
   items: CartItem[];
   totalPrice: number;
+  totalDiscountedPrice: number; // New variable for total discounted price
 }
 
 const initialState: CartState = {
   items: [],
   totalPrice: 0,
+  totalDiscountedPrice: 0, // Initialize the new variable
 };
 
 export const cartSlice = createSlice({
@@ -45,15 +49,22 @@ export const cartSlice = createSlice({
         state.items.push({
           id: product._id,
           title: product.title,
-          price: priceAfterDiscount,
+          price: product.price,
+          discountedPrice: priceAfterDiscount,
           quantity: 1,
-          image: product.images[0], // Store only the first image
+          discount: product.discount,
+          image: product.images[0],
         });
       }
 
-      // Update total price
+      // Update total price and total discounted price
       state.totalPrice = state.items.reduce(
         (total, item) => total + item.price * item.quantity,
+        0
+      );
+
+      state.totalDiscountedPrice = state.items.reduce(
+        (total, item) => total + item.discountedPrice * item.quantity,
         0
       );
     },
@@ -61,8 +72,15 @@ export const cartSlice = createSlice({
     // Remove product
     removeProduct: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
+
+      // Update total price and total discounted price
       state.totalPrice = state.items.reduce(
         (total, item) => total + item.price * item.quantity,
+        0
+      );
+
+      state.totalDiscountedPrice = state.items.reduce(
+        (total, item) => total + item.discountedPrice * item.quantity,
         0
       );
     },
@@ -71,6 +89,7 @@ export const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
       state.totalPrice = 0;
+      state.totalDiscountedPrice = 0; // Reset total discounted price
     },
 
     // Increase quantity
@@ -79,8 +98,15 @@ export const cartSlice = createSlice({
       if (item) {
         item.quantity += 1;
       }
+
+      // Update total price and total discounted price
       state.totalPrice = state.items.reduce(
         (total, item) => total + item.price * item.quantity,
+        0
+      );
+
+      state.totalDiscountedPrice = state.items.reduce(
+        (total, item) => total + item.discountedPrice * item.quantity,
         0
       );
     },
@@ -91,8 +117,15 @@ export const cartSlice = createSlice({
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       }
+
+      // Update total price and total discounted price
       state.totalPrice = state.items.reduce(
         (total, item) => total + item.price * item.quantity,
+        0
+      );
+
+      state.totalDiscountedPrice = state.items.reduce(
+        (total, item) => total + item.discountedPrice * item.quantity,
         0
       );
     },

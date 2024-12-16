@@ -37,7 +37,7 @@ body {
 }
 
 .section-gap-xy {
-  @apply py-10 px-[80px];
+  @apply lg:py-10 py-5 lg:px-[80px] px-4;
 }
 
 .activeStep {

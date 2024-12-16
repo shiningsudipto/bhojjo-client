@@ -6,6 +6,7 @@ interface InputProps {
   label?: string;
   type?: string;
   required?: boolean;
+  readOnly?: boolean;
 }
 
 const FormikInput = ({
@@ -13,6 +14,7 @@ const FormikInput = ({
   label,
   type = "text",
   required = false,
+  readOnly = false,
 }: InputProps) => {
   return (
     <div>
@@ -20,6 +22,7 @@ const FormikInput = ({
         {({ field }: FieldProps) => (
           <>
             <Input
+              readOnly={readOnly}
               className="px-3"
               {...field}
               type={type}

@@ -2,6 +2,7 @@ import { Button } from "@material-tailwind/react";
 
 interface CustomButtonProps {
   label: string;
+  className?: string;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   variant?: "outlined" | "filled";
@@ -13,6 +14,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   type = "button",
   variant = "filled",
   disabled = false,
+  className,
   onclick,
 }) => {
   return (
@@ -27,7 +29,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         variant === "filled"
           ? "bg-primary hover:bg-primary-500"
           : "text-primary border-primary font-semibold"
-      } hover:shadow-none text-base capitalize`}
+      } hover:shadow-none text-base capitalize ${className && className}`}
     >
       {label}
     </Button>

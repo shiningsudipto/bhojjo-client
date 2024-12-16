@@ -6,14 +6,14 @@ import { FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="section-gap-x py-10 bg-white">
-      <div className="flex justify-between">
+      <div className="flex lg:flex-row flex-col justify-between">
         <div className="text-black-100 space-y-2">
           <h3 className="text-xl font-bold">
             Get faster, free delivery at market prices
           </h3>
           <p className="">Get the best </p>
         </div>
-        <Button className="text-base font-medium bg-primary hover:bg-primary-500 capitalize">
+        <Button className="text-base font-medium bg-primary hover:bg-primary-500 capitalize lg:mt-0 mt-5">
           Call 01611777085 for support
         </Button>
       </div>

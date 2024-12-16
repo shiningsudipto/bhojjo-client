@@ -16,12 +16,16 @@ import {
 import { IoClose } from "react-icons/io5";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import { RxCrossCircled } from "react-icons/rx";
+import { TUser, useCurrentUser } from "../../redux/slices/auth";
+import { useNavigate } from "react-router-dom";
 const CartDrawer = () => {
   const [openRight, setOpenRight] = useState(false);
   const { items, totalPrice } = useAppSelector(useCartOptions);
   const dispatch = useAppDispatch();
+  const user = useAppSelector(useCurrentUser) as TUser;
   const openDrawerRight = () => setOpenRight(true);
   const closeDrawerRight = () => setOpenRight(false);
+  const navigate = useNavigate();
   return (
     <div>
       <div className="fixed top-[50%] right-0">
@@ -37,6 +41,7 @@ const CartDrawer = () => {
         </Button>
       </div>
       <Drawer
+        overlay={false}
         size={400}
         placement="right"
         open={openRight}
@@ -68,6 +73,7 @@ const CartDrawer = () => {
                     />
                     <div className="flex flex-col col-span-2 justify-between">
                       <p>{item.title}</p>
+                      <p>Got discount: {item.discount}%</p>
                       <div className="flex items-center gap-3">
                         <p>Quantity:</p>
                         <button
@@ -104,6 +110,8 @@ const CartDrawer = () => {
               <p>{totalPrice.toFixed(2)} TK</p>
             </div>
             <Button
+              disabled={!user || items.length === 0}
+              onClick={() => navigate("/checkout")}
               className="capitalize text-[16px] font-medium bg-primary hover:shadow-none mt-5"
               size="sm"
               fullWidth

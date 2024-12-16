@@ -1,4 +1,5 @@
 import Account from "../pages/account/Account";
+import Checkout from "../pages/checkout/Checkout";
 import Home from "../pages/home/Home";
 import Products from "../pages/products/Products";
 
@@ -18,6 +19,10 @@ export const pageRoutes = [
       {
         path: "shop",
         element: <Products />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
     ],
   },
