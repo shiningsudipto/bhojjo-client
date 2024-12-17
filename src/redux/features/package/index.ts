@@ -42,6 +42,22 @@ const packageApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Package"],
     }),
+    updatePackageItem: builder.mutation({
+      query: (itemData) => ({
+        url: `/package/item`,
+        method: "PUT",
+        body: itemData,
+      }),
+      invalidatesTags: ["Package"],
+    }),
+    deletePackageItem: builder.mutation({
+      query: (itemData) => ({
+        url: `/package/item`,
+        method: "DELETE",
+        body: itemData,
+      }),
+      invalidatesTags: ["Package"],
+    }),
   }),
 });
 
@@ -52,4 +68,6 @@ export const {
   useDeletePackageMutation,
   useGetPackageItemsByPackageQuery,
   useAddItemIntoPackageMutation,
+  useUpdatePackageItemMutation,
+  useDeletePackageItemMutation,
 } = packageApi;
