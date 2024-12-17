@@ -24,7 +24,7 @@ const Account = () => {
     address: userData?.address,
   };
   const handleSubmit = async (values: FormikValues) => {
-    const toastId = toast.loading("Login processing!");
+    const toastId = toast.loading("Profile info updating!");
     try {
       const res = await updateUserFunc({
         id: user?.id,
