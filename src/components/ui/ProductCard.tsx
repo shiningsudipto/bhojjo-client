@@ -8,8 +8,15 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
 import MyPackages from "../../pages/collections/components/MyPackages";
+import CardSkeleton from "../shared/CardSkeleton";
 
-const ProductCard = ({ products }: { products: TProduct[] }) => {
+const ProductCard = ({
+  products,
+  isLoading,
+}: {
+  products: TProduct[];
+  isLoading?: Boolean;
+}) => {
   const [isDetailsModalOpen, setDetailsModalOpen] = useState(false);
   const [productDetails, setProductDetails] = useState<TProduct>();
   const user = useAppSelector(useCurrentUser) as TUser;
@@ -19,48 +26,52 @@ const ProductCard = ({ products }: { products: TProduct[] }) => {
   return (
     <>
       <div className="grid grid-cols-3 gap-x-5 gap-y-10">
-        {products?.map((item) => {
-          return (
-            <div key={item?._id} className="space-y-2 relative">
-              <img
-                // src={`http://localhost:5000${item.images[0]}`}
-                src={`https://pqina.nl/pintura/static/assets/picture.svg`}
-                alt=""
-                className="h-[250px] w-full object-cover rounded-md"
-              />
-              <h5 className="text-xl font-semibold">{item.title}</h5>
-              <p className="flex items-center text-black-100 font-semibold text-lg">
-                {item.price}
-                <FaBangladeshiTakaSign className="" />{" "}
-              </p>
-              <Button
-                onClick={() => dispatch(addToCart(item))}
-                className="capitalize text-[16px] font-medium bg-primary hover:shadow-none"
-                size="sm"
-                fullWidth
-              >
-                Add to cart
-              </Button>
-              <Button
-                onClick={() => {
-                  setProductDetails(item);
-                  setDetailsModalOpen(true);
-                }}
-                className="capitalize text-[16px] font-medium hover:shadow-none bg-transparent"
-                size="sm"
-                fullWidth
-                variant="outlined"
-              >
-                More details
-              </Button>
-              {user && (
-                <div className="absolute top-0 right-2">
-                  <MyPackages id={user?.id} productId={item?._id} />
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, index) => (
+              <CardSkeleton key={index} />
+            ))
+          : products?.map((item) => {
+              return (
+                <div key={item?._id} className="space-y-2 relative">
+                  <img
+                    // src={`http://localhost:5000${item.images[0]}`}
+                    src={`https://pqina.nl/pintura/static/assets/picture.svg`}
+                    alt=""
+                    className="h-[250px] w-full object-cover rounded-md"
+                  />
+                  <h5 className="text-xl font-semibold">{item.title}</h5>
+                  <p className="flex items-center text-black-100 font-semibold text-lg">
+                    {item.price}
+                    <FaBangladeshiTakaSign className="" />{" "}
+                  </p>
+                  <Button
+                    onClick={() => dispatch(addToCart(item))}
+                    className="capitalize text-[16px] font-medium bg-primary hover:shadow-none"
+                    size="sm"
+                    fullWidth
+                  >
+                    Add to cart
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setProductDetails(item);
+                      setDetailsModalOpen(true);
+                    }}
+                    className="capitalize text-[16px] font-medium hover:shadow-none bg-transparent"
+                    size="sm"
+                    fullWidth
+                    variant="outlined"
+                  >
+                    More details
+                  </Button>
+                  {user && (
+                    <div className="absolute top-0 right-2">
+                      <MyPackages id={user?.id} productId={item?._id} />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          );
-        })}
+              );
+            })}
       </div>
       <CustomModal open={isDetailsModalOpen} setOpen={setDetailsModalOpen}>
         <Details details={productDetails} />

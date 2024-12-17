@@ -24,17 +24,13 @@ const Products = () => {
   const { data, isLoading } = useGetAllProductQuery(query);
   const productData = data?.data;
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <div className="section-gap-xy flex gap-5">
       <div className="bg-gray-50 w-[23%] h-fit p-5 rounded-md">
         <Sidebar />
       </div>
       <div className="bg-gray-50 w-[77%] p-5 rounded-md">
-        <ProductCard products={productData} />
+        <ProductCard products={productData} isLoading={isLoading} />
       </div>
     </div>
   );
