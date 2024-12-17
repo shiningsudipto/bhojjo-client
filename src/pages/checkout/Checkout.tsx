@@ -13,6 +13,7 @@ import Loader from "../../components/shared/Loader";
 import { useCreateOrderMutation } from "../../redux/features/order";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { Radio } from "@material-tailwind/react";
 
 const Checkout = () => {
   const { items, totalPrice, totalDiscountedPrice } =
@@ -102,6 +103,17 @@ const Checkout = () => {
                 );
               }}
             </Formik>
+            <div className="mt-8">
+              <h3 className="text-xl font-bold">Payment Method</h3>
+              <Radio
+                crossOrigin={""}
+                name=""
+                color="red"
+                className=""
+                label="Cash on delivery"
+                defaultChecked
+              />
+            </div>
           </div>
         )}
         <div className="bg-gray-50 p-5 rounded-md">
@@ -136,6 +148,7 @@ const Checkout = () => {
               </div>
             </div>
             <CustomButton
+              disabled={items.length === 0}
               onclick={() => handlePayment()}
               type="submit"
               label="Order"
