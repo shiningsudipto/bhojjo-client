@@ -9,10 +9,11 @@ import {
 } from "../../redux/features/user";
 import { TErrorResponse, TUserDB } from "../../types";
 import { toast } from "sonner";
+import Loader from "../../components/shared/Loader";
 
 const Account = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
-  const { data } = useGetUserByIdQuery(user?.id);
+  const { data, isLoading } = useGetUserByIdQuery(user?.id);
   const [updateUserFunc] = useUpdateUserMutation();
   const userData = data?.data as TUserDB;
   const dispatch = useAppDispatch();
@@ -40,6 +41,11 @@ const Account = () => {
       toast.error(err?.data?.message, { id: toastId, duration: 2000 });
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="bg-white p-10">
       <div className="">
