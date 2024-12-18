@@ -3,7 +3,7 @@ import { TProduct } from "../../types";
 import { RootState } from "../store";
 
 // Cart Item structure
-interface CartItem {
+export interface TCartItem {
   id: string;
   title: string;
   discountedPrice: number;
@@ -15,7 +15,7 @@ interface CartItem {
 
 // Cart State
 interface CartState {
-  items: CartItem[];
+  items: TCartItem[];
   totalPrice: number;
   totalDiscountedPrice: number; // New variable for total discounted price
 }

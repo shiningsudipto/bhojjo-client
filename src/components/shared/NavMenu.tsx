@@ -50,15 +50,15 @@ function NavList() {
 
 const profileLinks = [
   {
-    path: "/account/details",
+    path: "/user/details",
     label: "Account",
   },
   {
-    path: "/account/order-history",
+    path: "/user/order-history",
     label: "Past Orders",
   },
   {
-    path: "/account/my-collections",
+    path: "/user/my-collections",
     label: "Saved Collections",
   },
 ];

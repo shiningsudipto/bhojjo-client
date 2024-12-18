@@ -14,14 +14,32 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useState } from "react";
 import CustomModal from "../../components/ui/CustomModal";
 import { toast } from "sonner";
+import { useCreateOrderByCollectionMutation } from "../../redux/features/order";
 
 const Collections = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
   const { data, isLoading } = useGetAllPackageByUserQuery(user?.id);
   const [deleteCollectionFunc] = useDeletePackageMutation();
+  const [createOrderFunc] = useCreateOrderByCollectionMutation();
   const [isDeleteCollectionModalOpen, setDeleteCollectionModalOpen] =
     useState(false);
   const [selectedCollection, setSelectedCollection] = useState<TPackage>();
+
+  const handlePayment = async (item: TPackage) => {
+    const toastId = toast.loading("Order placing, please wait!");
+
+    try {
+      const res = await createOrderFunc(item).unwrap();
+      if (res.success) {
+        toast.success(res.message, { id: toastId, duration: 2000 });
+      }
+    } catch (error) {
+      console.log("error:", error);
+      const err = error as TErrorResponse;
+      toast.error(err?.data?.message, { id: toastId, duration: 2000 });
+    }
+  };
+
   const handleCollectionDelete = async () => {
     setDeleteCollectionModalOpen(false);
     const toastId = toast.loading("Collection deleting please wait...!");
@@ -38,6 +56,7 @@ const Collections = () => {
       toast.error(err.data.message, { id: toastId });
     }
   };
+
   return (
     <>
       <div className="bg-white p-10 rounded-md">
@@ -80,11 +99,17 @@ const Collections = () => {
                   <p className="text-lg font-medium">
                     Total items:{item?.totalItems}
                   </p>
+                  <p className="text-lg font-medium">
+                    Total price:{item?.totalPrice}
+                  </p>
                   <p>
-                    Last edit:{" "}
+                    Created at:{" "}
                     {format(new Date(item?.updatedAt), "dd-MMM-yyyy")}
                   </p>
-                  <CustomButton label="Buy Now" />
+                  <CustomButton
+                    onclick={() => handlePayment(item)}
+                    label="Buy Now"
+                  />
                   <PackageDetails id={item?._id} />
                 </div>
               );

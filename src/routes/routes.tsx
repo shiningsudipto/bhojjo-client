@@ -4,6 +4,7 @@ import { routeGenerator } from "../utils/routeGenerator";
 import { pageRoutes } from "./page.routes";
 import AccountLayout from "../components/layouts/AccountLayout";
 import { accountRoutes } from "./account.routes";
+import { adminRoutes } from "./admin.routes";
 
 export const router = createBrowserRouter([
   {
@@ -12,9 +13,14 @@ export const router = createBrowserRouter([
     children: routeGenerator(pageRoutes),
   },
   {
-    path: "/account",
+    path: "/user",
     element: <AccountLayout />,
     children: routeGenerator(accountRoutes),
+  },
+  {
+    path: "/admin",
+    element: <AccountLayout />,
+    children: routeGenerator(adminRoutes),
   },
   // {
   //   path: "*",

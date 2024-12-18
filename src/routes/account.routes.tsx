@@ -4,19 +4,19 @@ import OrderHistory from "../pages/orderHistory/OrderHistory";
 
 export const accountRoutes = [
   {
-    path: "/account",
+    path: "/user",
     element: <Account />,
     children: [
       {
-        path: "/account/details",
+        path: "/user/details",
         element: <Account />,
       },
       {
-        path: "/account/order-history",
+        path: "/user/order-history",
         element: <OrderHistory />,
       },
       {
-        path: "/account/my-collections",
+        path: "/user/my-collections",
         element: <Collections />,
       },
     ],

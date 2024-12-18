@@ -6,15 +6,15 @@ import { TUser, useCurrentUser } from "../../redux/slices/auth";
 
 const userNavLinks = [
   {
-    path: "/account/details",
+    path: "/user/details",
     label: "Account Details",
   },
   {
-    path: "/account/order-history",
+    path: "/user/order-history",
     label: "Order History",
   },
   {
-    path: "/account/my-collections",
+    path: "/user/my-collections",
     label: "My Collections",
   },
 ];

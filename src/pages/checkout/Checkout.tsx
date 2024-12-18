@@ -1,13 +1,17 @@
 import { Form, Formik, FormikValues } from "formik";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
-import { clearCart, useCartOptions } from "../../redux/slices/cartSlice";
+import {
+  clearCart,
+  TCartItem,
+  useCartOptions,
+} from "../../redux/slices/cartSlice";
 import FormikInput from "../../components/Formik/FormikInput";
 import {
   useGetUserByIdQuery,
   useUpdateUserMutation,
 } from "../../redux/features/user";
-import { TErrorResponse, TUserDB } from "../../types";
+import { TErrorResponse, TProduct, TUserDB } from "../../types";
 import CustomButton from "../../components/ui/CustomButton";
 import Loader from "../../components/shared/Loader";
 import { useCreateOrderMutation } from "../../redux/features/order";
@@ -26,6 +30,10 @@ const Checkout = () => {
   const [createOrderFunc] = useCreateOrderMutation();
   const [updateUserFunc] = useUpdateUserMutation();
   const navigate = useNavigate();
+
+  const calculateTotalItems = (products: TCartItem[]): number => {
+    return products?.reduce((total, product) => total + product.quantity, 0);
+  };
 
   const initialValues = {
     district: userData?.city,
@@ -121,7 +129,7 @@ const Checkout = () => {
           <div className="mt-5 ">
             <div className="flex items-center justify-between font-bold">
               <p>Products</p>
-              <p>{items.length}</p>
+              <p>{calculateTotalItems(items)}</p>
             </div>
             <div>
               {items?.map((item) => (
