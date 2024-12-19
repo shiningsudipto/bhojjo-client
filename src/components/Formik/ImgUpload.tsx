@@ -7,8 +7,8 @@ interface InputProps {
   placeholder?: string;
   required?: boolean;
   multiple?: boolean;
-  values: Record<string, any>; // Generic record for Formik values
-  setFieldValue: (field: string, value: any) => void; // Update signature
+  values: Record<string, any>;
+  setFieldValue: (field: string, value: any) => void;
 }
 
 const ImgUpload = ({

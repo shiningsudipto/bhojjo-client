@@ -21,6 +21,10 @@ const userRoutes = [
 ];
 const adminRoutes = [
   {
+    path: "/admin/details",
+    label: "Account Details",
+  },
+  {
     path: "/admin/products",
     label: "Products",
   },
@@ -41,7 +45,7 @@ const adminRoutes = [
 const AccountLayout = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
 
-  let sidebarItems;
+  let sidebarItems: { path: string; label: string }[] = [];
 
   switch (user!.role) {
     case userRole.ADMIN:
@@ -50,7 +54,6 @@ const AccountLayout = () => {
     case userRole.USER:
       sidebarItems = userRoutes;
       break;
-
     default:
       break;
   }

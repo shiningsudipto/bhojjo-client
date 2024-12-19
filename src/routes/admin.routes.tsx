@@ -10,6 +10,10 @@ export const adminRoutes = [
     element: <Account />,
     children: [
       {
+        path: "/admin/details",
+        element: <Account />,
+      },
+      {
         path: "/admin/products",
         element: <Products />,
       },

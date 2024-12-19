@@ -16,6 +16,10 @@ const productApi = baseApi.injectEndpoints({
       },
       providesTags: ["Product"],
     }),
+    getAllProductForAdmin: builder.query({
+      query: () => `/product/all`,
+      providesTags: ["Product"],
+    }),
     createProduct: builder.mutation({
       query: (productData) => ({
         url: "/product",
@@ -24,7 +28,20 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
+    deleteProduct: builder.mutation({
+      query: (productData) => ({
+        url: "/product",
+        method: "DELETE",
+        body: productData,
+      }),
+      invalidatesTags: ["Product"],
+    }),
   }),
 });
 
-export const { useGetAllProductQuery, useCreateProductMutation } = productApi;
+export const {
+  useGetAllProductQuery,
+  useCreateProductMutation,
+  useGetAllProductForAdminQuery,
+  useDeleteProductMutation,
+} = productApi;
